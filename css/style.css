@@ -70,6 +70,7 @@ p {
     border: 2px solid rgba(255, 165, 0, 0.8) ;
     border-radius: 20px;
     max-width: 99%;
+    min-height: 300px;
     margin-left: .5%;
 }
 
@@ -88,6 +89,102 @@ p {
 #footer p{
     padding-left: 1%;
     padding-right: 1%;
+}
+
+#archaeologist{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    text-align: center;
+    color: aliceblue;
+    background-color: rgba(255, 165, 0, 1);
+    border: 2px solid rgba(255, 165, 0, 1) ;
+    border-radius: 20px;
+    max-width: 90%;
+    min-height: 300px;
+    margin-left: 5%;
+    
+}
+
+#anthropologist{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    text-align: center;
+    color: aliceblue;
+    background-color: rgba(255, 165, 0, 1);
+    border: 2px solid rgba(255, 165, 0, 1) ;
+    border-radius: 20px;
+    max-width: 90%;
+    min-height: 300px;
+    margin-left: 5%;
+    
+}
+
+#interpreter{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    text-align: center;
+    color: aliceblue;
+    background-color: rgba(255, 165, 0, 1);
+    border: 2px solid rgba(255, 165, 0, 1) ;
+    border-radius: 20px;
+    max-width: 90%;
+    min-height: 300px;
+    margin-left: 5%;
+    
+}
+
+#archaeologist, #anthropologist, #interpreter{
+    display: flex;
+}
+
+#staff1-img{
+    margin-top: 11%;
+    margin-left: 5%;
+}
+
+#staff1-persona{
+    margin-top: 1%;
+    text-align: left;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-bottom: 2%;
+
+}
+
+#staff2-img{
+    margin-top: 13%;
+    margin-right: 5%;
+}
+
+#staff2-persona{
+    margin-top: 1%;
+    text-align: left;
+    padding-left: 10%;
+    padding-right: 11%;
+    margin-bottom: 2%;
+}
+
+
+#staff3-img{
+    margin-top: 14%;
+    margin-left: 5%;
+}
+
+#staff3-persona{
+    margin-top: 1%;
+    text-align: left;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-bottom: 2%;
+}
+
+img{
+    border: 0.25px solid none;
+    border-radius: 10px;
+}
+
+hr{
+    width: 90%;
 }
 
 #mid-col-1, #mid-col-2, #mid-col-3{
