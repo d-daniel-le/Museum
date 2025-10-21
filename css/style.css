@@ -96,8 +96,8 @@ p {
     margin-bottom: 2%;
     text-align: center;
     color: aliceblue;
-    background-color: rgba(255, 165, 0, 1);
-    border: 2px solid rgba(255, 165, 0, 1) ;
+    background-color: rgba(255, 165, 0, 0.8);
+    border: 2px solid rgba(255, 165, 0, 0.8) ;
     border-radius: 20px;
     max-width: 90%;
     min-height: 300px;
@@ -110,8 +110,8 @@ p {
     margin-bottom: 2%;
     text-align: center;
     color: aliceblue;
-    background-color: rgba(255, 165, 0, 1);
-    border: 2px solid rgba(255, 165, 0, 1) ;
+    background-color: rgba(255, 165, 0, 0.8);
+    border: 2px solid rgba(255, 165, 0, 0.8) ;
     border-radius: 20px;
     max-width: 90%;
     min-height: 300px;
@@ -124,8 +124,8 @@ p {
     margin-bottom: 2%;
     text-align: center;
     color: aliceblue;
-    background-color: rgba(255, 165, 0, 1);
-    border: 2px solid rgba(255, 165, 0, 1) ;
+    background-color: rgba(255, 165, 0, 0.8);
+    border: 2px solid rgba(255, 165, 0, 0.8) ;
     border-radius: 20px;
     max-width: 90%;
     min-height: 300px;
