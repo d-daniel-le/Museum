@@ -304,3 +304,91 @@ section{
     color: aliceblue;
 }
 
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(240,248,255,0.8);
+}
+
+.modal-content {
+    margin: 10% auto;
+    padding: 20px;
+    background-color: rgb(255, 165, 0);
+    width: 40%;
+    border-radius: 25px;
+}
+
+.modal-content img {
+    width: 100%;
+    height: auto;
+}
+
+.close-modal {
+    float: right;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #5b97c7;
+}
+
+
+.shop-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 20px;
+}
+
+.souvenir-item {
+    width: 15%;
+    background-color: rgba(255, 165, 0, 0.8);
+    padding: 10px;
+    border-radius: 25px;
+    position: relative;
+    margin-left: 7.25%;
+    margin-bottom: 3%;
+    max-height: 2000px;
+}
+.souvenir-item img {
+    width: 100%;
+    margin-top: 5%;
+    margin-left: 6.75%;
+    height: auto;
+    cursor: pointer;
+}
+
+.souvenir-item input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.souvenir-item button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 5%;
+    font-weight: bold;
+    background-color: #5b97c7;
+    color: aliceblue; 
+    border: none;
+    cursor: pointer;
+
+}
+
+.souvenir-item button:hover {
+    background-color: #154c79;
+}
+
+.tool-tip-content{
+    visibility: hidden;
+    color: aliceblue;
+    padding: 1% 2%;
+}
+
+.souvenir-item:hover .tool-tip-content{
+    visibility: visible;
+}
