@@ -6,23 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Daniel Le">
     <meta name="robots" content="noindex, nofollow">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab&family=Raleway&family=Lato">
     <link href="../css/style.css" rel="stylesheet"  type="text/css">
 
     <style>
+        /* #top h1{
+          background-color: transparent;
+          color: aliceblue;
+          border: none;
+        } */
+        h2{
+            background-color: rgba(255, 165, 0, 0.8);
+            border: 2px solid rgba(255, 165, 0, 0.8);
+            border-radius: 20px;
+            color: #154c79;
+            width: 20%;
+            padding: 1%;
+            text-align: center;
+            font-family: "Raleway";
+        }
+
+        h3{
+            margin-top: 2%;
+            margin-left: 5%;
+        }
+
+      
+        .disclaimer{
+            margin-left: 5.5%;
+            margin-right: 5%;
+            margin-bottom: 1%;
+            color: aliceblue;
+        }
         #sub-nav nav{
             display: flex;
             justify-content: center;
             /* margin: auto;
             width: 50%; */
-            margin-top: 2%;
+            margin-top: 1%;
             margin-bottom: 1%;
         }
 
         nav{
             padding: 0%;
         }
-
     </style>
     
     <title>Museum of The Origins of Speed</title>
@@ -37,7 +64,8 @@
         
         <button  onclick="location.href='../index.html'">Home</button>
         <button  onclick="location.href='../html/staff.html'">Staff</button>
-        <button  onclick="location.href='../html/collections.html'">Collections</button>
+        <button  onclick="showSection('archaeology')">Collections</button>
+        <button onclick="location.href='admin.html'">Login</button>
 
       </nav>
       
@@ -45,45 +73,292 @@
 
     <div id="sub-nav">
         <nav>
-            <button onclick="location.href='../html/archaeology.html'">Archaeology</button>
-            <button onclick="location.href='../html/anthropology.html'">Anthropology</button>
-            <button onclick="location.href='../html/history.html'">Histories</button>
+            <button onclick="showSection('archaeology')">Archaeology</button>
+            <button onclick="showSection('anthropology')">Anthropology</button>
+            <button onclick="showSection('histories')">Histories</button>
         </nav>
     </div>
+    <section id="archaeology" class="collection-section">
 
-    <!-- <div class="container-fluid">
+      <h2>Archaeology</h2>
+      <div class="collection-item">
 
+        <h3>Bronze Chariot Wheel</h3>
+        <hr>
 
-      <div class="row">
-
-        <div class="col" id="header" style="width: 100%;">
-          
+        <div class="images">
+          <img src="../images/collections/archeology-item1.png" style="width:450px;" alt="This is an image of a bronze chariot wheel found in Tyre, Lebanon" class="artifact-img">
         </div>
+      
+        <div class="field-group">
+          <p><strong>Name:</strong> Bronze Chariot Wheel <br>
+            <strong>Material:</strong> Forged bronze alloy and cedar wood core <br>
+            <strong>Size/Weight/Shape:</strong> 1.2 meters in diameter; 18 kilograms; circular with six spokes <br>
+            <strong>Physical Properties:</strong> Metallic oxidation, smooth inner axle ring <br>
+            <strong>Estimated Age:</strong> 2,300 years old (carbon-dated) <br>
+            <strong>Preservation State:</strong> Partial but structurally intact <br>
+            <strong>Location Found:</strong> Tyre, Lebanon — coastal ceremonial site <br>
+          </p>
+        </div>
+      
+        <div class="field-group">
+          <p><strong>Likely Purpose:</strong> Ceremonial racing or processional chariot <br>
+            <strong>Evidence of Use:</strong> Abrasion on rim edges; consistent wear patterns <br>
+            <strong>Manufacture Clues:</strong> Hammered joints, cast-spoke hubs <br>
+          </p>
+        </div>
+      
+        <div class="field-group">
+          <p><strong>Found With:</strong> Bronze tack pieces and horse fittings <br>
+            <strong>Burial or Habitat Context:</strong> Buried beneath temple floor tiles <br>
+            <strong>Symbolism:</strong> Represented divine movement and royal power <br>
+            <strong>Comparison:</strong> Parallels with Assyrian ceremonial chariots from Nimrud <br>
+          </p>
+        </div>
+      
+        <!-- Reserved space for future interpretation modal (Phase 4) -->
+        <!-- <button class="interpret-btn">Read Cultural Story</button> -->
+      </div>
+    
+      <div class="collection-item">
+
+        <h3>Iron Wheel Beering</h3>
+        <hr>
+
+        <div class="images">
+          <img src="../images/collections/archeology-item3.png" style="width:450px;" alt="This is an image of an iron wheel bearing" class="artifact-img">
+        </div>
+      
+        <div class="field-group">
+          <p>
+            <strong>Name:</strong> Iron Wheel Bearing from Early Race Cart <br>
+            <strong>Material:</strong> Iron alloy with trace graphite lubricant <br>
+            <strong>Size/Weight/Shape:</strong> 7 cm diameter; cylindrical <br>
+            <strong>Physical Properties:</strong> Corroded edges, hardened inner core <br>
+            <strong>Estimated Age:</strong> Circa 200 BCE <br>
+            <strong>Preservation State:</strong> 60% intact <br>
+            <strong>Location Found:</strong> Alexandria workshop district <br>
+          </p>
+        </div>
+      
+        <div class="field-group">
+          <p>
+            <strong>Likely Purpose:</strong> Axle bearing for high-speed transport carts <br>
+            <strong>Evidence of Use:</strong> Heavy scoring and impact marks <br>
+            <strong>Manufacture Clues:</strong> Lathe-shaped rings and cast-mold core <br>
+          </p>
+        </div>
+      
+        <div class="field-group">
+          <p>
+            <strong>Found With:</strong> Tools, furnace slag, and broken wheel hubs <br>
+            <strong>Burial or Habitat Context:</strong> Found inside blacksmith forge debris layer <br>
+            <strong>Symbolism:</strong> Early evidence of mechanical innovation for speed <br>
+            <strong>Comparison:</strong> Comparable to Celtic chariot bearings in Gaul <br>
+          </p>
+        </div>
+      
+        <!-- Reserved space for future interpretation modal (Phase 4) -->
+        <!-- <button class="interpret-btn">Read Cultural Story</button> -->
+      </div>
+      
+      <div class="collection-item">
+
+        <h3>Ceramic Oil Flask</h3>
+        <hr>
+        <div class="images">
+          <img src="../images/collections/archeology-item2.png" style="width:450px;" alt="The image shows an Athlete's Ceramic Oil Flask found in Corinth, Greece" class="artifact-img">
+        </div>
+      
+        <div class="field-group">
+          <p>
+            <strong>Name:</strong> Athlete's Ceramic Oil Flask <br>
+            <strong>Material:</strong> Terracotta clay with black glaze finish <br>
+            <strong>Size/Weight/Shape:</strong> 15 cm tall; 0.6 kg; elongated oval with narrow neck <br>
+            <strong>Physical Properties:</strong> Slight surface erosion, otherwise intact <br>
+            <strong>Estimated Age:</strong> 1,800 years old <br>
+            <strong>Preservation State:</strong> Excellent, minor glaze fading <br>
+            <strong>Location Found:</strong> Corinth, Greece — bathhouse drain channel <br>
+          </p>
+        </div>
+      
+        <div class="field-group">
+          <p>
+            <strong>Likely Purpose:</strong> Held olive oil for pre-race body preparation <br>
+            <strong>Evidence of Use:</strong> Organic residue traces inside vessel <br>
+            <strong>Manufacture Clues:</strong> Wheel-thrown with stamped spiral base <br>
+          </p>
+        </div>
+      
+        <div class="field-group">
+          <p>
+            <strong>Found With:</strong> Bronze strigils and amphora fragments <br>
+            <strong>Burial or Habitat Context:</strong> Found in an athlete’s bathing area <br>
+            <strong>Symbolism:</strong> Ritual cleansing and readiness before competition <br>
+            <strong>Comparison:</strong> Similar to Roman oil vessels from Pompeii <br>
+          </p>
+        </div>
+
+        <!-- Reserved space for future interpretation modal (Phase 4) -->
+        <!-- <button class="interpret-btn">Read Cultural Story</button> -->
+      </div>
+      
+      <div class="collection-item">
+        <p class="disclaimer">This is a fictitious website created purely for academic purposes. The content in this gallery was entirely created by AI under human direction. It was then curated, reviewed and edited by a human before being published. This site was conceived by human. The site content was created by AI and it was conceived by human. The site images were created by AI and they have been reviewed, curated, edited, verfied, validated and augmented by a human.</p>
 
       </div>
 
-      <div class="row">
+    </section>
 
-        <div class="col" id="mid-col-1">
-          
+    <section id="anthropology" class="collection-section" style="display:none;">
+        
+      <h2>Anthropology</h2>
+
+      <div class="collection-item">
+
+        <h3>Skeletal Hand Fragment</h3>
+        <hr>
+
+        <div class="images">
+          <img src="../images/collections/anthropology-item1.png" style="width:450px;" alt="Fragments of a left hand found in Anatolia" class="artifact-img">
         </div>
-
-        <div class="col" id="mid-col-2">
-          
+      
+        <div class="field-group">
+          <p><strong>Name:</strong> Left Hand Phalanges <br>
+            <strong>Material:</strong> Human bone (osseous tissue) <br>
+            <strong>Size/Weight/Shape:</strong> Approx. 12 cm; lightweight and slender <br>
+            <strong>Physical Properties:</strong> Porous with mineral deposits <br>
+            <strong>Estimated Age:</strong> 1,500 years old <br>
+            <strong>Preservation State:</strong> Partial, well-preserved <br>
+            <strong>Location Found:</strong> Anatolia — burial mound of athlete class <br>
+          </p>
         </div>
-
-        <div class="col" id="mid-col-3">
-          
+      
+        <div class="field-group">
+          <p>
+            <strong>Likely Purpose:</strong> Human remains from ceremonial athlete burial <br>
+            <strong>Evidence of Use:</strong> None — skeletal <br>
+            <strong>Manufacture Clues:</strong> N/A <br>
+          </p>
         </div>
-
+      
+        <div class="field-group">
+          <p>
+            <strong>Found With:</strong> Bronze medal pendant and oil flask <br>
+            <strong>Burial or Habitat Context:</strong> Individual tomb aligned east-west <br>
+            <strong>Symbolism:</strong> Physical dedication to divine athleticism <br>
+            <strong>Comparison:</strong> Comparable to Panhellenic athlete burials <br>
+            
+          </p>
+        </div>
+      
+        <!-- Reserved space for future interpretation modal (Phase 4) -->
+        <!-- <button class="interpret-btn">Read Cultural Story</button> -->
       </div>
 
-      <div class="row" >
-        <div class="col" id="footer" style="width: 100%;">
-          
+      <div class="collection-item">
+
+        <h3>Bone Whistle</h3>
+        <hr>
+
+        <div class="images">
+          <img src="../images/collections/anthropology-item2.png" style="width:450px;" alt="This is an image of a ritual bone whistle found in Northern Italy" class="artifact-img">
         </div>
+      
+        <div class="field-group">
+          <p>
+            <strong>Name:</strong> Ritual Bone Whistle <br>
+            <strong>Material:</strong> Hollowed animal femur <br>
+            <strong>Size/Weight/Shape:</strong> 10 cm; tubular form <br>
+            <strong>Physical Properties:</strong> Smooth with tonal holes <br>
+            <strong>Estimated Age:</strong> 2,000 years old <br>
+            <strong>Preservation State:</strong> Complete, slight mineral staining <br>
+            <strong>Location Found:</strong> Northern Italy — hillside shrine <br>
+          </p>
+        </div>
+      
+        <div class="field-group">
+          <p>
+            <strong>Likely Purpose:</strong> Used for timing or ceremonial signal <br>
+            <strong>Evidence of Use:</strong> Lip wear, polished rim <br>
+            <strong>Manufacture Clues:</strong> Precision-drilled holes, stone tool shaping <br>
+          </p>
+        </div>
+      
+        <div class="field-group">
+          <p>
+            <strong>Found With:</strong> Bronze bells and wooden drums <br>
+            <strong>Burial or Habitat Context:</strong> Ritual deposit in cave <br>
+            <strong>Symbolism:</strong> Communication with gods or start of races <br>
+            <strong>Comparison:</strong> Matches Etruscan ritual instruments <br>
+          </p>
+        </div>
+      
+        <!-- Reserved space for future interpretation modal (Phase 4) -->
+        <!-- <button class="interpret-btn">Read Cultural Story</button> -->
       </div>
 
-    </div> -->
- </body>
+
+      <div class="collection-item">
+
+        <h3>Charred Footprints</h3>
+        <hr>
+
+        <div class="images">
+          <img src="../images/collections/anthropology-item3.PNG" style="width:450px;" alt="This is an image of charred footprints" class="artifact-img">
+        </div>
+      
+        <div class="field-group">
+          <p>
+            <strong>Name:</strong> Charred Footprints in Volcanic Ash <br>
+            <strong>Material:</strong> Basaltic ash imprints <br>
+            <strong>Size/Weight/Shape:</strong> Average adult male size 10 <br>
+            <strong>Physical Properties:</strong> Crisp outline, preserved surface <br>
+            <strong>Estimated Age:</strong> 3,000 years old <br>
+            <strong>Preservation State:</strong> Pristine <br>
+            <strong>Location Found:</strong> Santorini caldera site <br>
+          </p>
+        </div>
+      
+        <div class="field-group">
+          <p>
+            <strong>Likely Purpose:</strong> Natural preservation of human movement <br>
+            <strong>Evidence of Use:</strong> Stride indicates running motion <br>
+            <strong>Manufacture Clues:</strong> Naturally cast during eruption <br>
+          </p>
+        </div>
+      
+        <div class="field-group">
+          <p>
+            <strong>Found With:</strong> Ceramic shards and carbonized rope <br>
+            <strong>Burial or Habitat Context:</strong> Abandoned coastal settlement <br>
+            <strong>Symbolism:</strong> Frozen act of escape and endurance <br>
+            <strong>Comparison:</strong> Comparable to Pompeii footprint tracks <br>
+          </p>
+        </div>
+      
+        <!-- Reserved space for future interpretation modal (Phase 4) -->
+        <!-- <button class="interpret-btn">Read Cultural Story</button> -->
+      </div>
+
+      
+      <div class="collection-item">
+        <p class="disclaimer">This is a fictitious website created purely for academic purposes. The content in this gallery was entirely created by AI under human direction. It was then curated, reviewed and edited by a human before being published. This site was conceived by human. The site content was created by AI and it was conceived by human. The site images were created by AI and they have been reviewed, curated, edited, verfied, validated and augmented by a human.</p>
+
+      </div>
+    </section>
+    <section id="histories" class="collection-section" style="display:none;">
+      
+      <h2>Histories</h2>
+    </section>
+
+    <script>
+      function showSection(section) {
+        const sections = document.querySelectorAll('.collection-section');
+        sections.forEach(s => s.style.display = 'none');
+        document.getElementById(section).style.display = 'block';
+      }
+    </script>
+  </body>
+ 
 </html>
