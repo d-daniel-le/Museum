@@ -304,6 +304,40 @@ section{
     color: aliceblue;
 }
 
+.modal-title{
+    width: 100%;
+    margin-left: 0%;
+    padding-left: 0%;
+    text-align: left;
+}
+
+.field-histories{
+    width: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.field-description{
+    padding-top: 1%;
+    margin-top: 3%;
+}
+
+.field-img{
+    width: 45%;
+}
+
+a{
+    text-decoration: none;
+    color: #154c79;
+}
+
+a:hover{
+    color: aliceblue;
+}
+
+.field-img p{
+    font-family: "Lato";
+    color: #154c79;
+}
 
 /* Modal */
 .modal {
