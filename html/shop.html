@@ -63,6 +63,7 @@
         <button  onclick="location.href='../html/staff.html'">Staff</button>
         <button  onclick="location.href='../html/collections.html'">Collections</button>
         <button onclick="location.href='../html/shop.html'">Shop</button>
+        <button onclick="location.href='cart.html'" id="viewCartBtn">View Cart</button> 
 
       </nav>
       <p>The content in this shop was entirely created by AI under human direction. It was then curated, reviewed, and edited by a human before being published.</p>
@@ -84,7 +85,8 @@
             <p class="tool-tip-content">"Echoes of the hillside shrine"</p>
           </div>
           <p><strong>Price:</strong> $15.99</p>
-          <button onclick="addToCart('item001')" id="item001">Add Bone Whistle Replica to Cart</button>
+          <span class="qty-badge" aria-live="polite"></span>
+          <button onclick="addToCart(this)" data-id="item001" data-name="Bone Whistle" data-price="15.99" data-image="../images/shops/anthropology-item2-shop.png" id="item001">Add Bone Whistle Replica to Cart</button>
         </div>
         <!-- END SINGLE ITEM 1 BLOCK -->
 
@@ -98,7 +100,8 @@
               <p class="tool-tip-content">"Turn of the divine"</p>
             </div>
             <p><strong>Price:</strong> $35.99</p>
-            <button onclick="addToCart('item002')" id="item002">Add Bronze Chariot Wheel Replica to Cart</button>
+            <span class="qty-badge" aria-live="polite"></span>
+            <button onclick="addToCart(this)" data-id="item002" data-name="Bronze Chariot Wheel" data-price="35.99" data-image="../images/shops/archeology-item1-shop.png" id="item002">Add Bronze Chariot Wheel Replica to Cart</button>
         </div>
         <!-- END SINGLE ITEM 2 BLOCK -->
 
@@ -113,7 +116,8 @@
                 <p class="tool-tip-content">“Scent of victory”</p>
               </div>
             <p><strong>Price:</strong> $59.99</p>
-            <button onclick="addToCart('item003')" id="item003">Add Ceramic Oil Flask Replica to Cart</button>
+            <span class="qty-badge" aria-live="polite"></span>
+            <button onclick="addToCart(this)" data-id="item003" data-name="Ceramic Oil Flask" data-price="59.99" data-image="../images/shops/archeology-item2-shop.png" id="item003">Add Ceramic Oil Flask Replica to Cart</button>
         </div>
         <!-- END SINGLE ITEM 3 BLOCK -->
 
@@ -122,12 +126,13 @@
             <img src="../images/shops/archeology-item3-shop.png" alt="This is an image of an iron wheel bearing and how a replica would look like" style="width: 225px;" onclick="openModal(this)">
             <h3>Iron Wheel Bearing Replica</h3>
             <p class="itemId">item004</p>
-            <p>This was from the Archaeological Collection. This replica reproduces a 2nd-century BCE iron wheel bearing uncovered in the industrial district of Alexandria. The original, partially corroded yet structurally intact, featured lathe-shaped rings and a cast-mold core—hallmarks of early precision engineering. Heavy scoring and impact marks suggest it once supported high-speed racing or transport carts, showcasing an early understanding of friction reduction using graphite lubrication. Found amid forge debris, tools, and broken wheel hubs, the artifact symbolizes humankind’s enduring pursuit of mechanical innovation and speed, paralleling Celtic chariot bearings discovered in Gaul.</p>
+            <p>This was from the Archaeological Collection. This replica reproduces a 2nd-century BCE iron wheel bearing uncovered in the industrial district of Alexandria. The original, partially corroded yet structurally intact, featured lathe-shaped rings and a cast-mold core—hallmarks of early precision engineering. Heavy scoring and impact marks suggest it once supported high-speed racing or transport carts, showcasing an early understanding of friction reduction using graphite lubrication. Found amid forge debris, tools, and broken wheel hubs, the artifact symbolizes humankind's enduring pursuit of mechanical innovation and speed, paralleling Celtic chariot bearings discovered in Gaul.</p>
             <div>
               <p class="tool-tip-content">“Forged for speed.”</p>
             </div>
             <p><strong>Price:</strong> $30.00</p>
-            <button onclick="addToCart('item004')" id="item004">Add Iron Wheel Bearing Replica to Cart</button>
+            <span class="qty-badge" aria-live="polite"></span>
+            <button onclick="addToCart(this)" data-id="item004" data-name="Iron Wheel Bearing" data-price="30.00" data-image="../images/shops/archeology-item3-shop.png" id="item004">Add Iron Wheel Bearing Replica to Cart</button>
         </div>
         <!-- END SINGLE ITEM 4 BLOCK -->
     
@@ -143,9 +148,51 @@
 
     
       <script>
-        function addToCart(itemId) {
-          alert("Added " + itemId + " to cart (functionality to come)");
-          // Future: Push to cart array
+      
+      //this key links the shop to the cart
+
+        const CART_KEY = 'museumCartV1';
+        
+    
+    // This function reads the Cart information and write it to JSON  
+        function readCart() {
+          try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+          catch { return []; }
+        }
+    
+        function writeCart(cart) {
+          localStorage.setItem(CART_KEY, JSON.stringify(cart));
+        }
+     
+    /*This function is called by the addToCart button the first part reads the dataset contined in the buttons and asssigns the values to variables */
+    
+        function addToCart(btn) {
+          const id = btn.dataset.id;
+          const name = btn.dataset.name;
+          const unitPrice = Number(btn.dataset.price);
+          const image = btn.dataset.image;
+    
+    /* This part puts all of the individual items and puts them into an object called cart and writes it to LocalStorage   */
+    
+          let cart = readCart();
+          const idx = cart.findIndex(it => it.id === id);
+          if (idx >= 0) {
+            cart[idx].qty += 1;
+          } else {
+            cart.push({ id, name, unitPrice, qty: 1, image });
+          }
+          writeCart(cart);
+    
+          // Update the item card's qty badge
+    
+          const card = btn.closest('.souvenir-item');
+          if (card) {
+            const badge = card.querySelector('.qty-badge');
+            if (badge) {
+              const item = cart.find(it => it.id === id);
+              badge.textContent = item ? `Qty: ${item.qty}` : '';
+            }
+          }
         }
     
         function openModal(imgElement) {

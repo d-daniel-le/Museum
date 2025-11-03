@@ -426,3 +426,43 @@ a:hover{
 .souvenir-item:hover .tool-tip-content{
     visibility: visible;
 }
+
+/* cart.html */
+
+.display-result{
+    background-color: rgba(255, 165, 0, 0.8);
+    padding: 7%;
+    border: 2px solid rgba(255, 165, 0, 0.8);
+    border-radius: 25px;
+    font-family: "Lato";
+    color: aliceblue;
+
+}
+
+li{
+    list-style-type: none;
+    margin-top: 3%;
+    text-align: right;
+}
+
+.price{
+    margin-right: 30%;
+}
+
+#summary{
+    text-align: right;
+    margin-right: 50%;
+    width: 100%;
+    background-color: #154c79;
+    color: #154c79;
+}
+label{
+    font-family: "Lato";
+    margin-left: 2%;
+    border: none;
+
+}
+
+#keep-shopping{
+    margin-top: .75%;
+}

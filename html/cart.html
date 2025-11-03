@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="author" content="Daniel Le">
+  <meta name="viewport" content="width=device-width, initial-scale=1">    
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab&family=Raleway&family=Lato">
+  <link href="../css/style.css" rel="stylesheet"  type="text/css">
+
+  <title>Museum Cart</title>
+  <style>
+    /* minimal on-page styles for clarity; move to your CSS later if you want */
+    main { 
+      max-width: 720px; 
+      margin: 0 auto; 
+      padding: 16px; 
+    }
+    .controls { 
+      margin: 8px 0 12px; 
+    }
+    .empty { 
+      padding: 12px; 
+      border: 1px dashed #666; 
+      font-style: italic; 
+    }
+    pre#summary { 
+      background: #f8f8f8; 
+      padding: 12px; 
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; 
+    }
+    .actions { 
+      margin-top: 12px; 
+      display: flex; 
+      gap: 8px; 
+    }
+    h2{
+            background-color: rgba(255, 165, 0, 0.8);
+            border: 2px solid rgba(255, 165, 0, 0.8);
+            border-radius: 20px;
+            color: #154c79;
+            width: 20%;
+            padding: 1%;
+            text-align: center;
+            font-family: "Raleway";
+            margin-left: 40%;
+        }
+  </style>
+</head>
+<body>
+
+  <div id="top" style="width: 100%;">
+
+    <h1>Museum of The Origins of Speed</h1>
+
+    <nav>
+      
+      <button  onclick="location.href='../index.html'">Home</button>
+      <button  onclick="location.href='../html/staff.html'">Staff</button>
+      <button  onclick="location.href='../html/collections.html'">Collections</button>
+      <button onclick="location.href='../html/shop.html'">Shop</button>
+
+    </nav>
+    <p>The content in this shop was entirely created by AI under human direction. It was then curated, reviewed, and edited by a human before being published.</p>
+  </div>
+
+  <header>
+    <h2>Shopping Cart</h2>
+  </header>
+
+  <main>
+
+    <div class="display-result">
+      <!-- STATES & OUTPUT AREAS -->
+      <div id="emptyMsg" class="empty" hidden>Your cart is empty.</div>
+      <div id="items" hidden></div>
+      <pre id="summary" hidden></pre>
+
+      <!-- NEW CONTROLS (Cart page only) -->
+      <div class="controls">
+        <label><input type="checkbox" id="memberToggle"> Member Discount (15%)</label>
+      </div>
+
+      <!-- BASIC ACTIONS -->
+      <div class="actions">
+        <button id="clearBtn">Clear Cart</button>
+        <a href="shop.html" id="keep-shopping">Keep Shopping</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+  /* =================== PIPE FROM shop.html (leave as-is) =================== */
+  // shop.html must write items with: data-id, data-name, data-price, data-image
+  // addToCart(btn) should push objects { id, name, unitPrice, qty, image } to localStorage
+
+  const CART_KEY = 'museumCartV1'; // MUST match shop.html
+
+  function readCart(){
+    try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+    catch { return []; }
+  }
+  function writeCart(cart){
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  }
+  /* ================= END PIPE ============================================= */
+
+
+  /* ====================== UTILITIES & CONSTANTS =========================== */
+  // Currency with parentheses for negatives
+  function money(n){
+    const sign = n < 0 ? -1 : 1;
+    const s = '$' + Math.abs(n).toFixed(2);
+    return sign < 0 ? '('+s+')' : s;
+  }
+
+  // Spec constants
+  const TAX_RATE = 0.102;
+  const MEMBER_DISCOUNT_RATE = 0.15;
+  const SHIPPING_RATE = 25.00;
+  const VOLUME_TIERS = [
+    [0.00, 49.99, 0.00],
+    [50.00, 99.99, 0.05],
+    [100.00, 199.99, 0.10],
+    [200.00, Infinity, 0.15]
+  ];
+
+  // Return the volume discount rate given an item total
+  function volumeRate(total){
+    for (const [min,max,rate] of VOLUME_TIERS){
+      if (total >= min && total <= max) return rate;
+    }
+    return 0;
+  }
+
+  // Remove a line item entirely (qty=0 => drop row)
+  function removeItem(id){
+    const next = readCart().filter(it => it.id !== id);
+    writeCart(next);
+    render();
+  }
+
+  // Clear cart = initial state (cart empty, member unchecked)
+  function clearCart(){
+    writeCart([]);
+    document.getElementById('memberToggle').checked = false;
+    render();
+  }
+  /* ================== END UTILITIES & CONSTANTS =========================== */
+
+
+  /* ====================== STUDENT WORK STARTS HERE =========================
+     IMPLEMENT render() to mirror the commission assignment:
+
+     1) Load cart from readCart(); keep only items with qty > 0 and unitPrice > 0
+     2) If empty → show #emptyMsg and hide #items and #summary
+     3) Build a text-only list in #items:
+           Example line: "2 × Celestial Inkstone               $29.90"
+           Include a small Remove button per line that calls removeItem(id)
+     4) Math (single-discount rule):
+           ItemTotal = sum(unitPrice * qty)
+           If Member checked AND Volume tier would apply → PROMPT user to choose:
+             "Only one discount may be applied. Type 'M' for Member or 'V' for Volume:"
+             Apply only the chosen one; set the other to $0.00
+           Else apply Member OR Volume (not both)
+           Subtotal = ItemTotal − AppliedDiscount + SHIPPING_RATE
+           TaxAmount = Subtotal * TAX_RATE
+           InvoiceTotal = Subtotal + TaxAmount
+     5) Write a single summary block to #summary (like commission):
+           Subtotal of Items
+           Volume Discount
+           Member Discount
+           Shipping
+           Subtotal (Taxable)
+           Tax Rate %   (as a percentage text)
+           Tax Amount $ (as currency)
+           Invoice Total
+     6) Recompute (call render()) after:
+           - Member checkbox change
+           - Clear Cart
+           - Remove line item
+
+     KEEP IT SIMPLE: text output only, one render pass.
+  ========================================================================= */
+
+  function render(){
+    const itemsDiv   = document.getElementById('items');
+    const summaryPre = document.getElementById('summary');
+    const emptyMsg   = document.getElementById('emptyMsg');
+    const isMember   = document.getElementById('memberToggle').checked;
+
+    let itemTotal = 0;
+    let displayItems = '<ul>';
+    let item = ""
+    let itemCost = 0.00
+    let volumeDiscountRate = 0.00
+    let memberDiscountTotal = 0;
+    let discountPerVolume = 0;
+    let subtotal = 0.00;
+    let taxAmount = 0.00;
+    let invoiceTotal = 0.0;
+    let choice = "";
+    // Load cart
+    let cart = readCart().filter(it => it.qty > 0 && it.unitPrice > 0);
+    
+
+    // If there isn't anything in the cart
+    if (cart.length === 0) {
+      emptyMsg.hidden = false;
+      itemsDiv.hidden = true;
+      summaryPre.hidden = true;
+    }
+    // Otherwise dis
+    else{
+
+      emptyMsg.hidden = true;
+      itemsDiv.hidden = false;
+      summaryPre.hidden = false;
+
+    }
+
+    // Build cart items
+    for (let i = 0; i<cart.length; i++) {
+      item = cart[i]
+      itemCost = item.unitPrice * item.qty;
+      itemTotal += itemCost;
+      displayItems += `
+        <li>${item.qty} x ${item.name}
+          <button onclick="removeItem('${item.id}')">Remove</button>
+            <span class="price">${money(itemCost)} </span>
+        </li>`;
+    }
+    displayItems += '</ul>';
+    itemsDiv.innerHTML = displayItems;
+
+    // Calculate Discounts 
+    volumeDiscountRate = volumeRate(itemTotal);
+
+    // Apply discount logic (only one discount)
+    if (isMember && volumeDiscountRate > 0) {
+      choice = prompt("Only one discount may be applied. Type 'M' for Member or 'V' for Volume:");
+      if (choice.toUpperCase() === 'M') {
+        memberDiscountTotal = itemTotal * MEMBER_DISCOUNT_RATE;
+      } 
+      else {
+        discountPerVolume = itemTotal * volumeDiscountRate;
+      }
+    } 
+
+    else if (isMember) {
+      memberDiscountTotal = itemTotal * MEMBER_DISCOUNT_RATE;
+    } 
+    
+    else if (volumeDiscountRate > 0) {
+      discountPerVolume = itemTotal * volumeDiscountRate;
+    }
+
+    // Calculate Totals
+    subtotal = itemTotal - memberDiscountTotal - discountPerVolume + SHIPPING_RATE;
+    taxAmount = subtotal * TAX_RATE;
+    invoiceTotal = subtotal + taxAmount;
+
+    // 5. Summary
+    summaryPre.textContent = `
+    Subtotal of Items:  ${money(itemTotal)} 
+    Volume Discount: ${money(-discountPerVolume)} 
+    Member Discount:    ${money(-memberDiscountTotal)} 
+    Shipping:   ${money(SHIPPING_RATE)} 
+    Subtotal (Taxable):  ${money(subtotal)} 
+    Tax Rate:    ${(TAX_RATE * 100).toFixed(2)}%
+    Tax Amount:   ${money(taxAmount)} 
+    Invoice Total:  ${money(invoiceTotal)} 
+    `;
+}
+
+  // Events → re-render
+  document.getElementById('memberToggle').addEventListener('change', render);
+  document.getElementById('clearBtn').addEventListener('click', clearCart);
+
+  // First paint
+  render();
+  </script>
+</body>
+</html>
